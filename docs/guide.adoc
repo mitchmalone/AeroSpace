@@ -282,6 +282,37 @@ That's why unless you override `exec` section in your config, AeroSpace falls ba
 ----
 
 [#tree]
+[#command-center]
+=== Command center
+
+`aerospace command-center` toggles a full-screen overview of all workspaces on all monitors.
+Bind it like any other command:
+
+[source,toml]
+----
+[mode.main.binding]
+alt-tab = 'command-center'
+----
+
+In the overview, click a workspace to focus it, drag windows between workspaces, drag a window onto the edge of another window to insert it there, or drag a window onto the center of another window to put both under a common container.
+Press Escape to close the overview and get the focus back.
+
+By default, tiles show the app icon and the window title, which doesn't require any additional permissions.
+
+The colors of the overview can be configured in the `[command-center]` table.
+Colors are in `0xAARRGGBB` format (either as a hex integer or as a string).
+
+[source,toml]
+----
+[command-center]
+background-color = 0xcc000000 # Backdrop that covers the monitor
+workspace-color = 0xff1e1e1e  # Workspace tile fill
+window-color = 0xff2e2e2e     # Window thumbnail fill
+active-color = 0xffe2e2e3     # Focused workspace and window border, drop target highlight
+inactive-color = 0xff494949   # Other borders
+text-color = 0xffe2e2e3       # Workspace names and window titles
+----
+
 == Tree
 
 AeroSpace stores all windows and containers in a tree.

@@ -193,6 +193,36 @@ final class ConfigTest: XCTestCase {
         assertEquals(result.config.enableNormalizationFlattenContainers, false)
     }
 
+    func testParseCommandCenter() {
+        let result = parseConfig(
+            """
+            [command-center]
+            background-color = 0xcc000000
+            active-color = '0xffe2e2e3'
+            text-color = '#ff112233'
+            """,
+        )
+        assertEquals(result.errors, [])
+        assertEquals(result.config.commandCenter.backgroundColor, ArgbColor(0xCC00_0000))
+        assertEquals(result.config.commandCenter.activeColor, ArgbColor(0xFFE2_E2E3))
+        assertEquals(result.config.commandCenter.textColor, ArgbColor(0xFF11_2233))
+        assertEquals(result.config.commandCenter.windowColor, CommandCenterConfig().windowColor)
+
+        let invalid = parseConfig(
+            """
+            [command-center]
+            background-color = 'red'
+            active-color = -1
+            text-color = true
+            """,
+        )
+        assertEquals(invalid.strErrors, [
+            "[ERROR] command-center.active-color: Color must be in [0x00000000, 0xFFFFFFFF] range. Got: -1",
+            "[ERROR] command-center.background-color: Can't parse color 'red'. Expected format: 0xAARRGGBB",
+            "[ERROR] command-center.text-color: Expected types are 'int' or 'string'. But actual type is 'bool'",
+        ])
+    }
+
     func testUnknownKeyParseError() {
         let result = parseConfig(
             """

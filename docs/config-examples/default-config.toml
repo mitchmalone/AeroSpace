@@ -61,6 +61,12 @@ on-mode-changed = []
 
 focus-follows-mouse.enabled = false
 
+# Colors of the 'command-center' workspace overview in 0xAARRGGBB format
+# See: https://nikitabobko.github.io/AeroSpace/guide#command-center
+# [command-center]
+# background-color = 0xcc000000
+# active-color = 0xffe2e2e3
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 key-mapping.preset = 'qwerty'
